@@ -4,62 +4,119 @@
     <meta charset="utf-8">
     <title>Cursor Handler - A-Frame School</title>
     <meta name="description" content="Cursor Handler - A-Frame School">
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-    <script>
-      AFRAME.registerComponent('handle-events', {
-        init: function () {
-          var el = this.el;  // <a-box>
-          // Add event listeners here.
-        } 
-      });
-    </script>
-    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script>
-  AFRAME.registerComponent('change-color-on-hover', {
-    schema: {
-      color: {default: 'red'}
-    },
+      AFRAME.registerComponent("basic", {
+        init: function() {
+          var sceneEl = document.querySelector("a-scene");
 
-    init: function () {
-      var data = this.data;
-      var el = this.el;  // <a-box>
-      var defaultColor = el.getAttribute('material').color;
-
-      el.addEventListener('mouseenter', function () {
-        el.setAttribute('color', data.color);
+          var colors = Array(
+            "#d0dfe6",
+            "#eef7f2",
+            "#fcd337",
+            "#f8df72",
+            "#ffd111",
+            "#fe8844",
+            "#c88af9"
+          );
+          for (var i = 0; i < 30; i++) {
+            var boxEl = document.createElement("a-sphere");
+            var boxE2 = document.createElement("a-sphere");
+            var boxE3 = document.createElement("a-sphere");
+            boxEl.setAttribute("material", {
+              color: colors[Math.floor(Math.random() * colors.length)]
+            });
+            boxE2.setAttribute("material", {
+              color: colors[Math.floor(Math.random() * colors.length)]
+            });
+            boxE3.setAttribute("material", {
+              color: colors[Math.floor(Math.random() * colors.length)]
+            });
+            var r = Math.max(20, Math.random() * 60);
+            var theta = Math.random() * 360;
+            boxEl.setAttribute("position", {
+              x: Math.sin(theta) * r,
+              y: Math.random() * 50 - 25,
+              z: Math.cos(theta) * r - 8
+            });
+            boxE2.setAttribute("position", {
+              x: Math.random() * 50 - 25,
+              y: Math.cos(theta) * r - 8,
+              z: Math.sin(theta) * r
+            });
+            boxE3.setAttribute("position", {
+              x: Math.cos(theta) * r - 8,
+              y: Math.sin(theta) * r,
+              z: Math.random() * 50 - 25
+            });
+            boxEl.setAttribute("scale", { x: 0.1, y: 0.1, z: 0.1 });
+            boxE2.setAttribute("scale", { x: 0.1, y: 0.1, z: 0.1 });
+            boxE3.setAttribute("scale", { x: 0.1, y: 0.1, z: 0.1 });
+            var dur = ((i % 5) + 1) * 2000;
+            var value =
+              "property: material.color; dur: " +
+              dur +
+              "; to: #0f1423; loop: true; easing: linear";
+            boxEl.setAttribute("animation", value);
+            boxE2.setAttribute("animation", value);
+            boxE3.setAttribute("animation", value);
+            sceneEl.appendChild(boxEl);
+            sceneEl.appendChild(boxE2);
+            sceneEl.appendChild(boxE3);
+          }
+        }
       });
-
-      el.addEventListener('mouseleave', function () {
-        el.setAttribute('color', defaultColor);
+    </script>
+    <script>
+      AFRAME.registerComponent("cursor-listener", {
+        init: function() {
+          var lastIndex = -1;
+          var COLORS = ["#ffff80", "#ccffcc", "#99bbff", "#ccc0ff"];
+          this.el.addEventListener("click", function(evt) {
+            lastIndex = (lastIndex + 1) % COLORS.length;
+            this.setAttribute("material", "color", COLORS[lastIndex]);
+            console.log("I was clicked at: ", evt.detail.intersection.point);
+          });
+        }
       });
-    }
-  });
-</script>
+    </script>
   </head>
   <body>
-    <a-scene>
-      <a-box color="#EF2D5E" position="0 1 -4" change-color-on-hover="color: blue"></a-box>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"
-           event-set__enter="_event: mouseenter; color: #8FF7FF"
-           event-set__leave="_event: mouseleave; color: #4CC3D9"></a-box>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
-                event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
-                event-set__leave="_event: mouseleave; _target: #cylinderText; visible: false">
-        <a-text id="cylinderText" value="This is a cylinder" align="center" color="#FFF" visible="false" position="0 -0.55 0.55"
-              geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
-      </a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"
-             event-set__down="_event: mousedown; material.wireframe: true"
-             event-set__up="_event: mouseup; material.wireframe: false"
-             event-set__leave="_event: mouseleave; material.wireframe: false"></a-plane>
-
+    <a-scene basic cursor="rayOrigin: mouse" background="color: white">
       
-      <a-camera>
-        <a-cursor></a-cursor>
-      </a-camera>
-      <a-sky color="#333"></a-sky>
-      <a-plane color="#000" rotation="-90 0 0" width="500" height="500"></a-plane>
-    </a-scene>
+      <a-sky color="#0f1423"></a-sky>
+
+    <!-- A-Frame Hello World scene -->
+    
+    <a-sphere class="clickable" mixin="collider" position="0 1.25 -5" radius="1.25" shadow color="#EF2D5E"></a-sphere>
+    
+    <a-box class="clickable" mixin="collider" position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow></a-box>
+    
+    <a-cylinder class="clickable" mixin="collider" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+    
+    <!-- plane won't be clickable -->
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+    
+    <!-- Camera & Hand Controls -->
+    
+    <a-entity id="cameraRig">
+        <a-entity id="head" camera position="0 1.6 0" wasd-controls look-controls></a-entity>
+        <a-entity mixin="hand" laser-controls="hand: left"></a-entity>
+        <a-entity mixin="hand teleport" laser-controls="hand: right"></a-entity>
+    </a-entity>
+    
+    <!-- Helpers -->
+    
+    <!-- define common attributes for hand controls -->
+    <a-mixin id="hand" raycaster="objects: .clickable"></a-mixin>
+    
+    <!-- define teleport controls -->
+    <a-mixin id="teleport" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button:trigger"></a-mixin>
+    
+    <!-- define common attributes for clickable objects -->
+    <a-mixin id="collider" material="opacity: 0.99" event-set__mousedown="scale: 0.9 0.9 0.9" event-set__mouseenter="opacity: 0.8" event-set__mouseleave="opacity: 0.99" event-set__mouseup="scale: 1 1 1"></a-mixin>
+    
+</a-scene>
   </body>
 </html>
