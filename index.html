@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Cursor Handler - A-Frame School</title>
-    <meta name="description" content="Cursor Handler - A-Frame School">
+    <meta name="description" content="Cursor Handler - A-Frame School" />
+
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-    <script>
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-event-set-component@4.0.1/dist/aframe-event-set-component.min.js"></script>
+
+    <!--     <script>
       AFRAME.registerComponent("basic", {
         init: function() {
           var sceneEl = document.querySelector("a-scene");
@@ -80,43 +84,93 @@
           });
         }
       });
-    </script>
+    </script> -->
   </head>
   <body>
-    <a-scene basic cursor="rayOrigin: mouse" background="color: white">
-      
-      <a-sky color="#0f1423"></a-sky>
+    <a-scene cursor="rayOrigin: mouse" background="black">
+      <a-assets>
+        <!-- define common attributes for clickable objects -->
+        <a-mixin
+          id="collider"
+          material="opacity: 0.99"
+          event-set__mousedown="scale: 0.9 0.9 0.9"
+          event-set__mouseenter="opacity: 0.8"
+          event-set__mouseleave="opacity: 0.99"
+          event-set__mouseup="scale: 1 1 1"
+        ></a-mixin>
 
-    <!-- A-Frame Hello World scene -->
-    
-    <a-sphere class="clickable" mixin="collider" position="0 1.25 -5" radius="1.25" shadow color="#EF2D5E"></a-sphere>
-    
-    <a-box class="clickable" mixin="collider" position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" shadow></a-box>
-    
-    <a-cylinder class="clickable" mixin="collider" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
-    
-    <!-- plane won't be clickable -->
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
-    
-    <!-- Camera & Hand Controls -->
-    
-    <a-entity id="cameraRig">
-        <a-entity id="head" camera position="0 1.6 0" wasd-controls look-controls></a-entity>
-        <a-entity mixin="hand" laser-controls="hand: left"></a-entity>
-        <a-entity mixin="hand teleport" laser-controls="hand: right"></a-entity>
-    </a-entity>
-    
-    <!-- Helpers -->
-    
-    <!-- define common attributes for hand controls -->
-    <a-mixin id="hand" raycaster="objects: .clickable"></a-mixin>
-    
-    <!-- define teleport controls -->
-    <a-mixin id="teleport" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button:trigger"></a-mixin>
-    
-    <!-- define common attributes for clickable objects -->
-    <a-mixin id="collider" material="opacity: 0.99" event-set__mousedown="scale: 0.9 0.9 0.9" event-set__mouseenter="opacity: 0.8" event-set__mouseleave="opacity: 0.99" event-set__mouseup="scale: 1 1 1"></a-mixin>
-    
-</a-scene>
+        <!-- define common attributes for hand controls -->
+        <a-mixin
+          id="hand"
+          raycaster="objects: .clickable"
+          teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger"
+        ></a-mixin>
+      </a-assets>
+
+      <!-- A-Frame Hello World scene -->
+
+      <a-sphere
+        class="clickable"
+        mixin="collider"
+        position="0 1.25 -5"
+        radius="1.25"
+        shadow
+        color="#EF2D5E"
+      ></a-sphere>
+
+      <a-box
+        class="clickable"
+        mixin="collider"
+        position="-1 0.5 -3"
+        rotation="0 45 0"
+        width="1"
+        height="1"
+        depth="1"
+        color="#4CC3D9"
+        shadow
+      ></a-box>
+
+      <a-cylinder
+        class="clickable"
+        mixin="collider"
+        position="1 0.75 -3"
+        radius="0.5"
+        height="1.5"
+        color="#FFC65D"
+        shadow
+      ></a-cylinder>
+
+      <!-- plane won't be clickable -->
+      <a-plane
+        position="0 0 -4"
+        rotation="-90 0 0"
+        width="4"
+        height="4"
+        color="#7BC8A4"
+        shadow
+      ></a-plane>
+
+      <!-- camera & hand controls -->
+
+      <a-entity id="cameraRig">
+        <a-entity
+          id="head"
+          camera
+          position="0 1.6 0"
+          wasd-controls
+          look-controls
+        ></a-entity>
+        <a-entity
+          id="lhand"
+          mixin="hand"
+          laser-controls="hand: left"
+        ></a-entity>
+        <a-entity
+          id="rhand"
+          mixin="hand"
+          laser-controls="hand: right"
+        ></a-entity>
+      </a-entity>
+    </a-scene>
   </body>
 </html>
