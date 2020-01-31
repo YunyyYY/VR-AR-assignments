@@ -1,4 +1,4 @@
-let cameraRig = document.querySelector("#camera-rig");
+let cameraRig = document.querySelector("#cameraRig");
 let camera = document.querySelector("#head");
 
 // get all the waypoints
@@ -8,5 +8,6 @@ let camera = document.querySelector("#head");
     // move the camera rig, not the camera, to the new location
     cameraRig.setAttribute("position", this.getAttribute("position"));
     camera.setAttribute("orientation", "0 0 0");
+    console.log("[waypoint] I was clicked at: ", e.detail.intersection.point);
   });
 });
