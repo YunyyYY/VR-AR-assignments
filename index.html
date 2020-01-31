@@ -107,6 +107,12 @@
           raycaster="objects: .clickable"
           teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger"
         ></a-mixin>
+        
+        <a-mixin
+          id="r-hand"
+          raycaster="objects: .clickable"
+        ></a-mixin>
+        
       </a-assets>
 
       <!--       Text label -->
@@ -127,6 +133,7 @@
       <!-- star -->
       <a-sphere
         cursor-listener
+        class="clickable"
         position="0 -2 -8"
         radius="3"
         color="#99bbff"
@@ -149,18 +156,19 @@
         scale="1.2 1.2 1.2"
         rotation="-18.4 114.69 1.298"
         gltf-model="#gltf"
-        event-set__enter="_event: mouseenter; scale: 3 3 3; position: -1 0 -8; rotation: 15 37 0.36;"
-        event-set__leave="_event: mouseleave; scale: 1.2 1.2 1.2; position: -1.096 0.483 -8; rotation: -18.4 114.69 1.298;"
       ></a-entity>
       <a-cylinder
+        class="clickable"
         id="glass"
         position="-1.261 1.042 -8"
         scale="0.3 0.9 0.3"
         rotation="2.292 2.42 24.95"
         color="#c6e6e8"
         opacity="0.4"
-        event-set__enterg="_event: mouseenter; visible: false; "
-        event-set__leaveg="_event: mouseleave;  visible: true; "
+        event-set__enter="_event: mouseenter; _target: #rose; scale: 3 3 3; position: -1 0 -8; rotation: 15 37 0.36;"
+        event-set__enterg="_event: mouseenter; _target: #glass; visible: false; "
+        event-set__leave="_event: mouseleave; _target: #rose; scale: 1.2 1.2 1.2; position: -1.096 0.483 -8; rotation: -18.4 114.69 1.298;"
+        event-set__leaveg="_event: mouseleave; _target: #glass; visible: true; "
       >
       </a-cylinder>
 
@@ -192,7 +200,7 @@
         ></a-entity>
         <a-entity
           id="rhand"
-          mixin="hand"
+          mixin="r-hand"
           laser-controls="hand: right"
         ></a-entity>
       </a-entity>
