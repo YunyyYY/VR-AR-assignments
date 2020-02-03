@@ -121,12 +121,32 @@
         ></a-mixin>
 
         <a-mixin id="r-hand" raycaster="objects: .clickable"></a-mixin>
+        
+        <a-asset-item
+            id="gltf"
+            src="https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fout.glb"
+          ></a-asset-item>
       </a-assets>
+      
+            <!-- sound -->
+      <audio
+        id="button3"
+        src="//cdn.rawgit.com/michaelnebeling/src/master/button-3.mp3"
+        crossorigin="anonymous"
+      ></audio>
+      <a-entity
+        id="bgm"
+        geometry="primitive: plane"
+        material="color: #0f1423"
+        position="-10 0 0"
+        sound="src: https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2Fbgm2.m4a?v=1580761109989; autoplay: true; loop: true"
+      ></a-entity>
 
       <!--       Text label -->
       <a-text value="Lingyun Guo" position="0 5 -8"></a-text>
 
-      <a-entity>
+      <a-entity id="main">
+        <a-animation attribute="rotation" dur="3000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
         <!-- prince -->
         <a-entity
           class="clickable"
@@ -161,12 +181,7 @@
 
         <!-- rose -->
         <!--       source : https://poly.google.com/view/f6cqKzn4kPj -->
-        <a-assets>
-          <a-asset-item
-            id="gltf"
-            src="https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fout.glb"
-          ></a-asset-item>
-        </a-assets>
+        
         <a-entity
           id="rose"
           position="-1.05 0.483 -8.1"
@@ -196,19 +211,7 @@
         </a-cylinder>
       </a-entity>
 
-      <!-- sound -->
-      <audio
-        id="button3"
-        src="//cdn.rawgit.com/michaelnebeling/src/master/button-3.mp3"
-        crossorigin="anonymous"
-      ></audio>
-      <a-entity
-        id="bgm"
-        geometry="primitive: plane"
-        material="color: #0f1423"
-        position="-10 0 0"
-        sound="src: https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2Fbgm2.m4a?v=1580761109989; autoplay: true; loop: true"
-      ></a-entity>
+
 
       <!--       environment-->
       <a-sky color="#0f1423"></a-sky>
