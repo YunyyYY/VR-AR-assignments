@@ -138,8 +138,9 @@
         color="#99bbff"
         shader="flat"
         opacity="0.4"
+        shadow="receive: true"
       ></a-sphere>
-      <a-sphere position="0 -2 -8" radius="3" color="#bbd1e0"></a-sphere>
+      <a-sphere position="0 -2 -8" radius="3" color="#bbd1e0" shadow="receive: true"></a-sphere>
 
       <!-- rose -->
       <!--       source : https://poly.google.com/view/f6cqKzn4kPj -->
@@ -151,11 +152,15 @@
       </a-assets>
       <a-entity
         id="rose"
-        position="-1.096 0.483 -8"
+        position="-1.05 0.483 -8.1"
         scale="1.2 1.2 1.2"
         rotation="-18.4 114.69 1.298"
         gltf-model="#gltf"
-      ></a-entity>
+        shadow="cast: true"
+      ><a-entity
+        light="color: #ff1616; intensity: 5; type: point; distance: 1; decay: 1"
+        position="1.37 1.32 -7.89"></a-entity>
+      </a-entity>
       <a-cylinder
         class="clickable"
         id="glass"
@@ -164,16 +169,14 @@
         rotation="2.292 2.42 24.95"
         color="#c6e6e8"
         opacity="0.4"
+        shadow="cast: true"
         event-set__enter="_event: mouseenter; _target: #rose; scale: 3 3 3; position: -1 0 -8; rotation: 15 37 0.36;"
         event-set__enterg="_event: mouseenter; _target: #glass; visible: false; "
         event-set__leave="_event: mouseleave; _target: #rose; scale: 1.2 1.2 1.2; position: -1.096 0.483 -8; rotation: -18.4 114.69 1.298;"
         event-set__leaveg="_event: mouseleave; _target: #glass; visible: true; "
       >
       </a-cylinder>
-      <a-entity
-        light="color: #fff8df; intensity: 0.5; type: point; "
-        position="0 1.7 0.8"
-      ></a-entity>
+      
 
       <!-- sound -->
       <a-entity
@@ -191,7 +194,7 @@
         particle-system="preset:dust;particleCount:1000;opacity:0.8;color: #0000FF,#00FF00,#FF0000"
       ></a-entity>
       <a-entity
-        light="color: #fff8df; intensity: 1.5"
+        light="color: #fff8df; intensity: 1.5; castShadow: true;"
         position="0 1.7 0.8"
       ></a-entity>
       <!--       <a-sky src="https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2FFlamingStar.jpg"></a-sky> -->
