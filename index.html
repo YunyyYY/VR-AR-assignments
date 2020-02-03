@@ -91,7 +91,7 @@
     </script>
   </head>
   <body>
-    <a-scene basic cursor="rayOrigin: mouse" background="black">
+    <a-scene basic cursor="rayOrigin: mouse" background="black" light="defaultLightsEnabled: false">
       <a-assets>
         <!-- define common attributes for clickable objects -->
         <a-mixin
@@ -111,7 +111,6 @@
         ></a-mixin>
 
         <a-mixin id="r-hand" raycaster="objects: .clickable"></a-mixin>
-        
       </a-assets>
 
       <!--       Text label -->
@@ -127,6 +126,7 @@
         gpoly="polyid: f_HG8bAlAfw; API_KEY: AIzaSyDsovdrekNH2A-NiKfMtMWA8LXebZQ41nk;"
         event-set__enter="_event: mouseenter; rotation: 11.673 130.35 4.59"
         event-set__leave="_event: mouseleave; rotation: 9.673 73.523 2.59"
+        shadow
       ></a-entity>
 
       <!-- star -->
@@ -141,6 +141,7 @@
       ></a-sphere>
       <a-sphere position="0 -2 -8" radius="3" color="#bbd1e0"></a-sphere>
 
+      <!-- rose -->
       <!--       source : https://poly.google.com/view/f6cqKzn4kPj -->
       <a-assets>
         <a-asset-item
@@ -148,8 +149,6 @@
           src="https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fout.glb"
         ></a-asset-item>
       </a-assets>
-      
-      <!-- rose -->
       <a-entity
         id="rose"
         position="-1.096 0.483 -8"
@@ -171,6 +170,10 @@
         event-set__leaveg="_event: mouseleave; _target: #glass; visible: true; "
       >
       </a-cylinder>
+      <a-entity
+        light="color: #fff8df; intensity: 0.5; type: point; "
+        position="0 1.7 0.8"
+      ></a-entity>
 
       <!-- sound -->
       <a-entity
@@ -181,66 +184,71 @@
         sound="src: https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fviolet_evengarden_piano_cut.m4a?v=1579754323959; autoplay: true; loop: true"
       ></a-entity>
 
-      
-<!--       <a-sky color="#0f1423"></a-sky> -->
-      <a-entity position="0 6 0" particle-system="preset:dust;particleCount:1000;opacity:0.8;color: #0000FF,#00FF00,#FF0000"></a-entity>
-      <a-sky src="https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2FFlamingStar.jpg"></a-sky>
+      <!--       environment-->
+      <a-sky color="#0f1423"></a-sky>
+      <a-entity
+        position="0 6 0"
+        particle-system="preset:dust;particleCount:1000;opacity:0.8;color: #0000FF,#00FF00,#FF0000"
+      ></a-entity>
+      <a-entity
+        light="color: #fff8df; intensity: 1.5"
+        position="0 1.7 0.8"
+      ></a-entity>
+      <!--       <a-sky src="https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2FFlamingStar.jpg"></a-sky> -->
 
       <!--       way points -->
       <a-entity>
         <a-plane
-        class="waypoint clickable"
-        color="#fad1f1"
-        position="8 0 -8"
-        rotation="-90 0 0"
-      ></a-plane>
-      <a-plane
-        class="waypoint clickable"
-        color="#0ef7f2"
-        position="-4 0 -4"
-        rotation="-90 0 0"
-      ></a-plane>
-      <a-plane
-        class="waypoint clickable"
-        color="#ff8080"
-        position="-8 0 -8"
-        rotation="-90 0 0"
-      ></a-plane>
-      <a-plane
-        class="waypoint clickable"
-        color="#ff99e6"
-        position="4 0 -4"
-        rotation="-90 0 0"
-      ></a-plane>
-      <a-plane
-        class="waypoint clickable"
-        color="#fcd337"
-        position="0 0 0"
-        rotation="-90 0 0"
-      ></a-plane>
-      <a-plane
-        class="waypoint clickable"
-        color="#b3b3ff"
-        position="4 0 -12"
-        rotation="-90 0 0"
-      ></a-plane>
-      <a-plane
-        class="waypoint clickable"
-        color="#ff9900"
-        position="-4 0 -12"
-        rotation="-90 0 0"
-      ></a-plane>
-      <a-plane
-        class="waypoint clickable"
-        color="#ccff99"
-        position="0 0 -16"
-        rotation="-90 0 0"
-      ></a-plane>
-
+          class="waypoint clickable"
+          color="#fad1f1"
+          position="8 0 -8"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#0ef7f2"
+          position="-4 0 -4"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#ff8080"
+          position="-8 0 -8"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#ff99e6"
+          position="4 0 -4"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#fcd337"
+          position="0 0 0"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#b3b3ff"
+          position="4 0 -12"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#ff9900"
+          position="-4 0 -12"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#ccff99"
+          position="0 0 -16"
+          rotation="-90 0 0"
+        ></a-plane>
       </a-entity>
-      
-      <!-- camera & hand controls -->
 
+      <!-- camera & hand controls -->
       <a-entity id="cameraRig">
         <a-entity
           id="head"
