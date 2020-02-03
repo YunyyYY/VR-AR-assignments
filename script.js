@@ -6,8 +6,8 @@ let camera = document.querySelector("#head");
   // handle gaze fusing
   waypoint.addEventListener("click", function(e) {
     // move the camera rig, not the camera, to the new location
-    cameraRig.setAttribute("position", this.getAttribute("position"));
-    camera.setAttribute("orientation", "0 0 0");
+    cameraRig.setAttribute("position", e.detail.intersection.point);
+    // camera.setAttribute("orientation", "0 0 0");
     
     var audio = new Audio('//cdn.rawgit.com/michaelnebeling/src/master/button-1.mp3');
     audio.play();

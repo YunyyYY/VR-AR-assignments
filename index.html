@@ -145,13 +145,13 @@
       <!--       Text label -->
       <a-text value="Lingyun Guo" position="0 5 -8"></a-text>
 
-      <a-entity id="main">
-        <a-animation attribute="rotation" dur="3000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
+      <a-entity id="main" position="0 0 -8">
+        <a-animation attribute="rotation" dur="30000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
         <!-- prince -->
         <a-entity
           class="clickable"
           id="prince"
-          position="0.89 3.049 -7.464"
+          position="0.89 3.049 0.55"
           scale="0.03 0.03 0.03"
           rotation="9.673 73.523 2.59"
           gpoly="polyid: f_HG8bAlAfw; API_KEY: AIzaSyDsovdrekNH2A-NiKfMtMWA8LXebZQ41nk;"
@@ -165,7 +165,7 @@
         <a-sphere
           cursor-listener
           class="clickable"
-          position="0 -2 -8"
+          position="0 -2 0"
           radius="3"
           color="#99bbff"
           shader="flat"
@@ -173,7 +173,7 @@
           shadow
         ></a-sphere>
         <a-sphere
-          position="0 -2 -8"
+          position="0 -2 0"
           radius="3"
           color="#bbd1e0"
           shadow
@@ -184,7 +184,7 @@
         
         <a-entity
           id="rose"
-          position="-1.05 0.483 -8.1"
+          position="-1.05 0.483 -0.1"
           scale="1.2 1.2 1.2"
           rotation="-18.4 114.69 1.298"
           gltf-model="#gltf"
@@ -197,20 +197,72 @@
         <a-cylinder
           class="clickable"
           id="glass"
-          position="-1.261 1.042 -8"
+          position="-1.261 1.042 0"
           scale="0.3 0.9 0.3"
           rotation="2.292 2.42 24.95"
           color="#c6e6e8"
           opacity="0.4"
-          event-set__enter="_event: mouseenter; _target: #rose; scale: 3 3 3; position: -1 0 -8; rotation: 15 37 0.36;"
+          event-set__enter="_event: mouseenter; _target: #rose; scale: 3 3 3; position: -1 0 0; rotation: 15 37 0.36;"
           event-set__enterg="_event: mouseenter; _target: #glass; visible: false; "
-          event-set__leave="_event: mouseleave; _target: #rose; scale: 1.2 1.2 1.2; position: -1.096 0.483 -8; rotation: -18.4 114.69 1.298;"
+          event-set__leave="_event: mouseleave; _target: #rose; scale: 1.2 1.2 1.2; position: -1.096 0.483 0; rotation: -18.4 114.69 1.298;"
           event-set__leaveg="_event: mouseleave; _target: #glass; visible: true; "
           shadow
         >
         </a-cylinder>
+        
+        <!--       way points -->
+      <a-entity id="wps">
+        <a-plane
+          class="waypoint clickable"
+          color="#fad1f1"
+          position="8 0 0"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#0ef7f2"
+          position="-4 0 4"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#ff8080"
+          position="-8 0 0"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#ff99e6"
+          position="4 0 4"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#fcd337"
+          position="0 0 8"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#b3b3ff"
+          position="4 0 -4"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#ff9900"
+          position="-4 0 -4"
+          rotation="-90 0 0"
+        ></a-plane>
+        <a-plane
+          class="waypoint clickable"
+          color="#ccff99"
+          position="0 0 -8"
+          rotation="-90 0 0"
+        ></a-plane>
       </a-entity>
 
+      </a-entity>
 
 
       <!--       environment-->
@@ -226,58 +278,7 @@
       <!--       <a-entity light="type: directional; color: #fff8df; intensity: 1.5; castShadow: true; shadowCameraVisible: true;" position="-2 2 2"></a-entity> -->
       <!--       <a-sky src="https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2FFlamingStar.jpg"></a-sky> -->
 
-      <!--       way points -->
-      <a-entity>
-        <a-plane
-          class="waypoint clickable"
-          color="#fad1f1"
-          position="8 0 -8"
-          rotation="-90 0 0"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#0ef7f2"
-          position="-4 0 -4"
-          rotation="-90 0 0"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#ff8080"
-          position="-8 0 -8"
-          rotation="-90 0 0"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#ff99e6"
-          position="4 0 -4"
-          rotation="-90 0 0"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#fcd337"
-          position="0 0 0"
-          rotation="-90 0 0"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#b3b3ff"
-          position="4 0 -12"
-          rotation="-90 0 0"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#ff9900"
-          position="-4 0 -12"
-          rotation="-90 0 0"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#ccff99"
-          position="0 0 -16"
-          rotation="-90 0 0"
-        ></a-plane>
-      </a-entity>
-
+      
       <!-- camera & hand controls -->
       <a-entity id="cameraRig">
         <a-entity
