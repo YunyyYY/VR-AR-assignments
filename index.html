@@ -8,6 +8,7 @@
     <script src="/script.js" defer></script>
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+    <script src="//unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
     <script src="https://rawgit.com/Utopiah/googlepoly-load-component/master/googlepoly-load-component.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@4.0.1/dist/aframe-event-set-component.min.js"></script>
@@ -140,7 +141,6 @@
       ></a-sphere>
       <a-sphere position="0 -2 -8" radius="3" color="#bbd1e0"></a-sphere>
 
-      <!-- rose -->
       <!--       source : https://poly.google.com/view/f6cqKzn4kPj -->
       <a-assets>
         <a-asset-item
@@ -148,6 +148,8 @@
           src="https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fout.glb"
         ></a-asset-item>
       </a-assets>
+      
+      <!-- rose -->
       <a-entity
         id="rose"
         position="-1.096 0.483 -8"
@@ -179,11 +181,14 @@
         sound="src: https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fviolet_evengarden_piano_cut.m4a?v=1579754323959; autoplay: true; loop: true"
       ></a-entity>
 
-      <a-sky color="#0f1423"></a-sky>
-<!--       <a-sky src="#skyTexture"></a-sky> -->
+      
+<!--       <a-sky color="#0f1423"></a-sky> -->
+      <a-entity position="0 6 0" particle-system="preset:dust;particleCount:1000;opacity:0.8;color: #0000FF,#00FF00,#FF0000"></a-entity>
+      <a-sky src="https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2FFlamingStar.jpg"></a-sky>
 
       <!--       way points -->
-      <a-plane
+      <a-entity>
+        <a-plane
         class="waypoint clickable"
         color="#fad1f1"
         position="8 0 -8"
@@ -232,6 +237,8 @@
         rotation="-90 0 0"
       ></a-plane>
 
+      </a-entity>
+      
       <!-- camera & hand controls -->
 
       <a-entity id="cameraRig">
