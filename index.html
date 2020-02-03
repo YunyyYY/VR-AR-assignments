@@ -9,7 +9,7 @@
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
     <script src="https://rawgit.com/Utopiah/googlepoly-load-component/master/googlepoly-load-component.js"></script>
-
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@4.0.1/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
 
@@ -181,14 +181,54 @@
       <a-sky color="#0f1423"></a-sky>
 
       <!--       way points -->
-      <a-plane class="waypoint clickable" color="#fad1f1" position="8 0 -8" rotation="-90 0 0"></a-plane>
-      <a-plane class="waypoint clickable" color="#0ef7f2" position="-4 0 -4" rotation="-90 0 0"></a-plane>
-      <a-plane class="waypoint clickable" color="#ff8080" position="-8 0 -8" rotation="-90 0 0"></a-plane>
-      <a-plane class="waypoint clickable" color="#ff99e6" position="4 0 -4" rotation="-90 0 0"></a-plane>
-      <a-plane class="waypoint clickable" color="#fcd337" position="0 0 0" rotation="-90 0 0"></a-plane>
-      <a-plane class="waypoint clickable" color="#b3b3ff" position="4 0 -12" rotation="-90 0 0"></a-plane>
-      <a-plane class="waypoint clickable" color="#ff9900" position="-4 0 -12" rotation="-90 0 0"></a-plane>
-      <a-plane class="waypoint clickable" color="#ccff99" position="0 0 -16" rotation="-90 0 0"></a-plane>
+      <a-plane
+        class="waypoint clickable"
+        color="#fad1f1"
+        position="8 0 -8"
+        rotation="-90 0 0"
+      ></a-plane>
+      <a-plane
+        class="waypoint clickable"
+        color="#0ef7f2"
+        position="-4 0 -4"
+        rotation="-90 0 0"
+      ></a-plane>
+      <a-plane
+        class="waypoint clickable"
+        color="#ff8080"
+        position="-8 0 -8"
+        rotation="-90 0 0"
+      ></a-plane>
+      <a-plane
+        class="waypoint clickable"
+        color="#ff99e6"
+        position="4 0 -4"
+        rotation="-90 0 0"
+      ></a-plane>
+      <a-plane
+        class="waypoint clickable"
+        color="#fcd337"
+        position="0 0 0"
+        rotation="-90 0 0"
+      ></a-plane>
+      <a-plane
+        class="waypoint clickable"
+        color="#b3b3ff"
+        position="4 0 -12"
+        rotation="-90 0 0"
+      ></a-plane>
+      <a-plane
+        class="waypoint clickable"
+        color="#ff9900"
+        position="-4 0 -12"
+        rotation="-90 0 0"
+      ></a-plane>
+      <a-plane
+        class="waypoint clickable"
+        color="#ccff99"
+        position="0 0 -16"
+        rotation="-90 0 0"
+      ></a-plane>
 
       <!-- camera & hand controls -->
 
