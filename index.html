@@ -91,7 +91,7 @@
     </script>
   </head>
   <body>
-    <a-scene basic cursor="rayOrigin: mouse" background="black" light="defaultLightsEnabled: false">
+    <a-scene basic cursor="rayOrigin: mouse" background="black" light="defaultLightsEnabled: false" shadow="type: pcfsoft">
       <a-assets>
         <!-- define common attributes for clickable objects -->
         <a-mixin
@@ -138,9 +138,9 @@
         color="#99bbff"
         shader="flat"
         opacity="0.4"
-        shadow="receive: true"
+        shadow
       ></a-sphere>
-      <a-sphere position="0 -2 -8" radius="3" color="#bbd1e0" shadow="receive: true"></a-sphere>
+      <a-sphere position="0 -2 -8" radius="3" color="#bbd1e0" shadow></a-sphere>
 
       <!-- rose -->
       <!--       source : https://poly.google.com/view/f6cqKzn4kPj -->
@@ -156,10 +156,10 @@
         scale="1.2 1.2 1.2"
         rotation="-18.4 114.69 1.298"
         gltf-model="#gltf"
-        shadow="cast: true"
+        shadow
       ><a-entity
         light="color: #ff1616; intensity: 5; type: point; distance: 1; decay: 1"
-        position="1.37 1.32 -7.89"></a-entity>
+        position="0 0.7 0"></a-entity>
       </a-entity>
       <a-cylinder
         class="clickable"
@@ -169,11 +169,11 @@
         rotation="2.292 2.42 24.95"
         color="#c6e6e8"
         opacity="0.4"
-        shadow="cast: true"
         event-set__enter="_event: mouseenter; _target: #rose; scale: 3 3 3; position: -1 0 -8; rotation: 15 37 0.36;"
         event-set__enterg="_event: mouseenter; _target: #glass; visible: false; "
         event-set__leave="_event: mouseleave; _target: #rose; scale: 1.2 1.2 1.2; position: -1.096 0.483 -8; rotation: -18.4 114.69 1.298;"
         event-set__leaveg="_event: mouseleave; _target: #glass; visible: true; "
+        shadow
       >
       </a-cylinder>
       
