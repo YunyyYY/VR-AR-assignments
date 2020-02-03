@@ -84,6 +84,8 @@
           this.el.addEventListener("click", function(evt) {
             lastIndex = (lastIndex + 1) % COLORS.length;
             this.setAttribute("material", "color", COLORS[lastIndex]);
+            var audio = new Audio('//cdn.rawgit.com/michaelnebeling/src/master/button-2.mp3');
+            audio.play();
             console.log("I was clicked at: ", evt.detail.intersection.point);
           });
         }
@@ -126,6 +128,7 @@
         gpoly="polyid: f_HG8bAlAfw; API_KEY: AIzaSyDsovdrekNH2A-NiKfMtMWA8LXebZQ41nk;"
         event-set__enter="_event: mouseenter; rotation: 11.673 130.35 4.59"
         event-set__leave="_event: mouseleave; rotation: 9.673 73.523 2.59"
+        sound__mouseenter="src: #button3; on: mouseenter; poolSize: 2"
         shadow
       ></a-entity>
 
@@ -179,6 +182,7 @@
       
 
       <!-- sound -->
+      <audio id="button3" src="//cdn.rawgit.com/michaelnebeling/src/master/button-3.mp3" crossorigin="anonymous"></audio>
       <a-entity
         id="bgm"
         geometry="primitive: plane"

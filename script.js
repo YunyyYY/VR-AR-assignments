@@ -8,6 +8,9 @@ let camera = document.querySelector("#head");
     // move the camera rig, not the camera, to the new location
     cameraRig.setAttribute("position", this.getAttribute("position"));
     camera.setAttribute("orientation", "0 0 0");
+    
+    var audio = new Audio('//cdn.rawgit.com/michaelnebeling/src/master/button-1.mp3');
+    audio.play();
     console.log("[waypoint] I was clicked at: ", e.detail.intersection.point);
   });
 });
