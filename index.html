@@ -94,6 +94,30 @@
         }
       });
     </script>
+    <script>
+      AFRAME.registerComponent("star-rain", {
+        init: function() {
+          var sceneEl = document.querySelector("a-scene");
+          for (var i = 0; i < 3; i++) {
+            var boxEl = document.createElement("a-box");
+            boxEl.setAttribute("material", {
+              color: "#ffff99"
+            });
+            var r = Math.random();
+            var theta = Math.random() * 360;
+            boxEl.setAttribute("position", {
+              x: Math.sin(theta) * r,
+              y: 2,
+              z: Math.cos(theta) * r
+            });
+            boxEl.setAttribute("scale", { x: 0.05, y: 0.05, z: 0.05 });
+            boxEl.setAttribute("dynamic-body");
+            sceneEl.appendChild(boxEl);
+            console.log("?");
+          }
+        }
+      });
+    </script>
 <!--     <script>
       AFRAME.registerComponent("basic", {
         init: function() {
@@ -132,6 +156,7 @@
   <body>
     <a-scene
       basic
+             star-rain
       cursor="rayOrigin: mouse"
       background="black"
       light="defaultLightsEnabled: false"
@@ -217,18 +242,18 @@
         ></a-sphere>
         
 <!--         physic particles -->
-        <a-box dynamic-body position="0.1 5 0" rotation="0 45 0" width="0.1" height="0.1" depth="0.1" color="#4CC3D9" shadow></a-box>
-        <a-box dynamic-body position="0.1 7 0.1" rotation="0 45 0" width="0.1" height="0.1" depth="0.1" color="#ffb3b3" shadow></a-box>
+<!--         <a-box dynamic-body position="0.1 5 0" rotation="0 45 0" width="0.1" height="0.1" depth="0.1" color="#4CC3D9" shadow></a-box>
+        <a-box dynamic-body position="0.1 5 0.1" rotation="0 45 0" width="0.1" height="0.1" depth="0.1" color="#ffb3b3" shadow></a-box>
         <a-box dynamic-body position="0.2 5 0.1" rotation="0 45 70" width="0.1" height="0.1" depth="0.1" color="#99ff99" shadow></a-box>
         <a-box dynamic-body position="0.12 3 0.32" rotation="0 45 76" width="0.1" height="0.1" depth="0.1" color="#6699ff" shadow></a-box>
         <a-box dynamic-body position="-0.1 7 -0.04" rotation="0 45 0" width="0.1" height="0.1" depth="0.1" color="#99ccff" shadow></a-box>
-        <a-box dynamic-body position="-0.1 8 0.2" rotation="90 45 0" width="0.1" height="0.1" depth="0.1" color="#ff9999" shadow></a-box>
+        <a-box dynamic-body position="-0.1 5 0.2" rotation="90 45 0" width="0.1" height="0.1" depth="0.1" color="#ff9999" shadow></a-box>
         <a-box dynamic-body position="0.1 8 0.09" rotation="30 45 0" width="0.1" height="0.1" depth="0.1" color="#ff8000" shadow></a-box>
-        <a-box dynamic-body position="-0.1 9 0.14" rotation="0 145 0" width="0.1" height="0.1" depth="0.1" color="#ffd633" shadow></a-box>
+        <a-box dynamic-body position="-0.1 6 0.14" rotation="0 145 0" width="0.1" height="0.1" depth="0.1" color="#ffd633" shadow></a-box>
         <a-box dynamic-body position="0.1 5 -0.1" rotation="0 5 5" width="0.1" height="0.1" depth="0.1" color="#ff0080" shadow></a-box>
         <a-box dynamic-body position="0.1 5 0.2" rotation="0 75 40" width="0.1" height="0.1" depth="0.1" color="#b3ff66" shadow></a-box>
         <a-box dynamic-body position="0.1 5 0.06" rotation="40 45 0" width="0.1" height="0.1" depth="0.1" color="#9999ff" shadow></a-box>
-
+ -->
         <!-- rose -->
         <!--       source : https://poly.google.com/view/f6cqKzn4kPj -->
         
