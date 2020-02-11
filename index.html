@@ -14,6 +14,9 @@
     <script src="https://unpkg.com/aframe-event-set-component@4.0.1/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
     <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/snap.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/intersection-spawn.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/random-color.js"></script>
 
     <script>
       AFRAME.registerComponent("basic", {
@@ -94,7 +97,7 @@
         }
       });
     </script>
-<!--     <script>
+    <!--     <script>
       AFRAME.registerComponent("star-rain", {
         init: function() {
           var sceneEl = document.querySelector("a-scene");
@@ -139,29 +142,35 @@
           event-set__mouseup="scale: 1 1 1"
         ></a-mixin>
 
+        <a-mixin
+          id="voxel"
+          geometry="primitive: ring; radius-inner:5 radius-outer:6"
+          material="shader: standard"
+          random-color
+          snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"
+        ></a-mixin>
+
         <!-- define common attributes for hand controls -->
         <a-mixin
-          id="hand"
+          id="l-hand"
           raycaster="objects: .clickable"
           teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger"
         ></a-mixin>
 
-        <a-mixin id="r-hand" raycaster="objects: .clickable"></a-mixin>
-        
-        <a-mixin id="voxel"
-         geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5"
-         material="shader: standard"
-         random-color
-         snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"
-      ></a-mixin>
-        
+        <a-mixin
+          id="r-hand"
+          raycaster="objects: .clickable"
+          controller-cursor
+          intersection-spawn="event: click; mixin: voxel"
+        ></a-mixin>
+
         <a-asset-item
-            id="gltf"
-            src="https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fout.glb"
-          ></a-asset-item>
+          id="gltf"
+          src="https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fout.glb"
+        ></a-asset-item>
       </a-assets>
-      
-            <!-- sound -->
+
+      <!-- sound -->
       <audio
         id="button3"
         src="//cdn.rawgit.com/michaelnebeling/src/master/button-3.mp3"
@@ -177,10 +186,15 @@
 
       <!--       Text label -->
       <a-text value="Lingyun Guo" position="0 5 -8"></a-text>
-      
 
       <a-entity id="main" position="0 0 -8">
-        <a-animation attribute="rotation" dur="30000" to="0 360 0" repeat="indefinite" easing="linear"></a-animation>
+        <a-animation
+          attribute="rotation"
+          dur="30000"
+          to="0 360 0"
+          repeat="indefinite"
+          easing="linear"
+        ></a-animation>
         <!-- prince -->
         <a-entity
           class="clickable"
@@ -196,7 +210,8 @@
         ></a-entity>
 
         <!-- star -->
-        <a-sphere static-body
+        <a-sphere
+          static-body
           cursor-listener
           class="clickable"
           position="0 -2 0"
@@ -212,21 +227,119 @@
           color="#bbd1e0"
           shadow
         ></a-sphere>
-<!--         physic particles -->
+        <!--         physic particles -->
         <a-entity>
-          
-        <a-box dynamic-body position="0.82 5 0.1" rotation="0 45 70" width="0.05" height="0.05" depth="0.05" color="#99ff99" shadow></a-box>
-        <a-box dynamic-body position="0.612 3 -0.32" rotation="0 45 76" width="0.05" height="0.05" depth="0.05" color="#6699ff" shadow></a-box>
-        <a-box dynamic-body position="-0.81 4 -0.04" rotation="0 45 0" width="0.05" height="0.05" depth="0.05" color="#99ccff" shadow></a-box>
-        <a-box dynamic-body position="-0.271 5 -0.2" rotation="90 45 0" width="0.05" height="0.05" depth="0.05" color="#ff9999" shadow></a-box>
-        <a-box dynamic-body position="0 4 0" rotation="30 45 0" width="0.05" height="0.05" depth="0.05" color="#ff8000" shadow></a-box>
-        <a-box dynamic-body position="0 6 0" rotation="0 145 0" width="0.05" height="0.05" depth="0.05" color="#ffd633" shadow></a-box>
-        <a-box dynamic-body position="0.17 5 -0.1" rotation="0 5 5" width="0.05" height="0.05" depth="0.05" color="#ff0080" shadow></a-box>
-        <a-box dynamic-body position="0.1 3 -0.72" rotation="0 75 40" width="0.05" height="0.05" depth="0.05" color="#b3ff66" shadow></a-box>
-        <a-box dynamic-body position="0.71 5 -0.606" rotation="40 45 0" width="0.05" height="0.05" depth="0.05" color="#9999ff" shadow></a-box>
-          <a-box dynamic-body position="0.1 5 0" rotation="0 45 0" width="0.05" height="0.05" depth="0.05" color="#4CC3D9" shadow></a-box>
-        <a-box dynamic-body position="0.1 5 0" rotation="0 45 0" width="0.05" height="0.05" depth="0.05" color="#4CC3D9" shadow></a-box>
-<!--         <a-box dynamic-body position="0.1 5 0.1" rotation="0 45 0" width="0.05" height="0.05" depth="0.05" color="#ffb3b3" shadow></a-box>
+          <a-box
+            dynamic-body
+            position="0.82 5 0.1"
+            rotation="0 45 70"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#99ff99"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.612 3 -0.32"
+            rotation="0 45 76"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#6699ff"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="-0.81 4 -0.04"
+            rotation="0 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#99ccff"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="-0.271 5 -0.2"
+            rotation="90 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#ff9999"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0 4 0"
+            rotation="30 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#ff8000"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0 6 0"
+            rotation="0 145 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#ffd633"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.17 5 -0.1"
+            rotation="0 5 5"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#ff0080"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.1 3 -0.72"
+            rotation="0 75 40"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#b3ff66"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.71 5 -0.606"
+            rotation="40 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#9999ff"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.1 5 0"
+            rotation="0 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#4CC3D9"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.1 5 0"
+            rotation="0 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#4CC3D9"
+            shadow
+          ></a-box>
+          <!--         <a-box dynamic-body position="0.1 5 0.1" rotation="0 45 0" width="0.05" height="0.05" depth="0.05" color="#ffb3b3" shadow></a-box>
         <a-box dynamic-body position="0.82 5 0.1" rotation="0 45 70" width="0.05" height="0.05" depth="0.05" color="#99ff99" shadow></a-box>
         <a-box dynamic-body position="0.612 3 0.32" rotation="0 45 76" width="0.05" height="0.05" depth="0.05" color="#6699ff" shadow></a-box>
         <a-box dynamic-body position="-0.81 4 -0.04" rotation="0 45 0" width="0.05" height="0.05" depth="0.05" color="#99ccff" shadow></a-box>
@@ -237,21 +350,111 @@
         <a-box dynamic-body position="0.1 3 0.72" rotation="0 75 40" width="0.05" height="0.05" depth="0.05" color="#b3ff66" shadow></a-box>
         <a-box dynamic-body position="0.71 5 0.606" rotation="40 45 0" width="0.05" height="0.05" depth="0.05" color="#9999ff" shadow></a-box>
           <a-box dynamic-body position="0.1 5 0" rotation="0 45 0" width="0.05" height="0.05" depth="0.05" color="#4CC3D9" shadow></a-box> -->
-        <a-box dynamic-body position="0.71 5 0.81" rotation="0 45 0" width="0.05" height="0.05" depth="0.05" color="#ffb3b3" shadow></a-box>
-        <a-box dynamic-body position="0.27 5 0.71" rotation="0 45 70" width="0.05" height="0.05" depth="0.05" color="#99ff99" shadow></a-box>
-        <a-box dynamic-body position="0.12 3 0.32" rotation="0 45 76" width="0.05" height="0.05" depth="0.05" color="#6699ff" shadow></a-box>
-        <a-box dynamic-body position="-0.1 3 -0.04" rotation="0 45 0" width="0.05" height="0.05" depth="0.05" color="#99ccff" shadow></a-box>
-        <a-box dynamic-body position="-0.1 5 0.2" rotation="90 45 0" width="0.05" height="0.05" depth="0.05" color="#ff9999" shadow></a-box>
-        <a-box dynamic-body position="0.1 4 0.09" rotation="30 45 0" width="0.05" height="0.05" depth="0.05" color="#ff8000" shadow></a-box>
-        <a-box dynamic-body position="-0.1 3 0.714" rotation="0 145 0" width="0.05" height="0.05" depth="0.05" color="#ffd633" shadow></a-box>
-        <a-box dynamic-body position="0.1 5 -0.81" rotation="0 5 5" width="0.05" height="0.05" depth="0.05" color="#ff0080" shadow></a-box>
-        <a-box dynamic-body position="0.71 5 0.92" rotation="0 75 40" width="0.05" height="0.05" depth="0.05" color="#b3ff66" shadow></a-box>
-        <a-box dynamic-body position="0.81 5 0.606" rotation="40 45 0" width="0.05" height="0.05" depth="0.05" color="#9999ff" shadow></a-box>
+          <a-box
+            dynamic-body
+            position="0.71 5 0.81"
+            rotation="0 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#ffb3b3"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.27 5 0.71"
+            rotation="0 45 70"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#99ff99"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.12 3 0.32"
+            rotation="0 45 76"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#6699ff"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="-0.1 3 -0.04"
+            rotation="0 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#99ccff"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="-0.1 5 0.2"
+            rotation="90 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#ff9999"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.1 4 0.09"
+            rotation="30 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#ff8000"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="-0.1 3 0.714"
+            rotation="0 145 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#ffd633"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.1 5 -0.81"
+            rotation="0 5 5"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#ff0080"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.71 5 0.92"
+            rotation="0 75 40"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#b3ff66"
+            shadow
+          ></a-box>
+          <a-box
+            dynamic-body
+            position="0.81 5 0.606"
+            rotation="40 45 0"
+            width="0.05"
+            height="0.05"
+            depth="0.05"
+            color="#9999ff"
+            shadow
+          ></a-box>
         </a-entity>
 
         <!-- rose -->
         <!--       source : https://poly.google.com/view/f6cqKzn4kPj -->
-        
+
         <a-entity
           id="rose"
           position="-1.05 0.483 -0.1"
@@ -279,69 +482,75 @@
           shadow
         >
         </a-cylinder>
-        
+
         <!--       way points -->
-      <a-entity id="wps">
-        <a-plane
-          class="waypoint clickable"
-          color="#fad1f1"
-          position="8 0 0"
-          rotation="-90 0 0"
-          event-set__mouseenter="opacity: 0.4" event-set__mouseleave="opacity: 1"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#0ef7f2"
-          position="-4 0 4"
-          rotation="-90 0 0"
-          event-set__mouseenter="opacity: 0.4" event-set__mouseleave="opacity: 1"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#ff8080"
-          position="-8 0 0"
-          rotation="-90 0 0"
-          event-set__mouseenter="opacity: 0.4" event-set__mouseleave="opacity: 1"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#ff99e6"
-          position="4 0 4"
-          rotation="-90 0 0"
-          event-set__mouseenter="opacity: 0.4" event-set__mouseleave="opacity: 1"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#fcd337"
-          position="0 0 8"
-          rotation="-90 0 0"
-          event-set__mouseenter="opacity: 0.4" event-set__mouseleave="opacity: 1"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#b3b3ff"
-          position="4 0 -4"
-          rotation="-90 0 0"
-          event-set__mouseenter="opacity: 0.4" event-set__mouseleave="opacity: 1"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#ff9900"
-          position="-4 0 -4"
-          rotation="-90 0 0"
-          event-set__mouseenter="opacity: 0.4" event-set__mouseleave="opacity: 1"
-        ></a-plane>
-        <a-plane
-          class="waypoint clickable"
-          color="#ccff99"
-          position="0 0 -8"
-          rotation="-90 0 0"
-          event-set__mouseenter="opacity: 0.4" event-set__mouseleave="opacity: 1"
-        ></a-plane>
+        <a-entity id="wps">
+          <a-plane
+            class="waypoint clickable"
+            color="#fad1f1"
+            position="8 0 0"
+            rotation="-90 0 0"
+            event-set__mouseenter="opacity: 0.4"
+            event-set__mouseleave="opacity: 1"
+          ></a-plane>
+          <a-plane
+            class="waypoint clickable"
+            color="#0ef7f2"
+            position="-4 0 4"
+            rotation="-90 0 0"
+            event-set__mouseenter="opacity: 0.4"
+            event-set__mouseleave="opacity: 1"
+          ></a-plane>
+          <a-plane
+            class="waypoint clickable"
+            color="#ff8080"
+            position="-8 0 0"
+            rotation="-90 0 0"
+            event-set__mouseenter="opacity: 0.4"
+            event-set__mouseleave="opacity: 1"
+          ></a-plane>
+          <a-plane
+            class="waypoint clickable"
+            color="#ff99e6"
+            position="4 0 4"
+            rotation="-90 0 0"
+            event-set__mouseenter="opacity: 0.4"
+            event-set__mouseleave="opacity: 1"
+          ></a-plane>
+          <a-plane
+            class="waypoint clickable"
+            color="#fcd337"
+            position="0 0 8"
+            rotation="-90 0 0"
+            event-set__mouseenter="opacity: 0.4"
+            event-set__mouseleave="opacity: 1"
+          ></a-plane>
+          <a-plane
+            class="waypoint clickable"
+            color="#b3b3ff"
+            position="4 0 -4"
+            rotation="-90 0 0"
+            event-set__mouseenter="opacity: 0.4"
+            event-set__mouseleave="opacity: 1"
+          ></a-plane>
+          <a-plane
+            class="waypoint clickable"
+            color="#ff9900"
+            position="-4 0 -4"
+            rotation="-90 0 0"
+            event-set__mouseenter="opacity: 0.4"
+            event-set__mouseleave="opacity: 1"
+          ></a-plane>
+          <a-plane
+            class="waypoint clickable"
+            color="#ccff99"
+            position="0 0 -8"
+            rotation="-90 0 0"
+            event-set__mouseenter="opacity: 0.4"
+            event-set__mouseleave="opacity: 1"
+          ></a-plane>
+        </a-entity>
       </a-entity>
-
-      </a-entity>
-
 
       <!--       environment-->
       <a-sky color="#0f1423"></a-sky>
@@ -357,7 +566,6 @@
       <!--       <a-entity light="type: directional; color: #fff8df; intensity: 1.5; castShadow: true; shadowCameraVisible: true;" position="-2 2 2"></a-entity> -->
       <!--       <a-sky src="https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2FFlamingStar.jpg"></a-sky> -->
 
-      
       <!-- camera & hand controls -->
       <a-entity id="cameraRig">
         <a-entity
@@ -369,14 +577,14 @@
         ></a-entity>
         <a-entity
           id="lhand"
-          mixin="hand"
+          mixin="l-hand"
           laser-controls="hand: left"
         ></a-entity>
         <a-entity
           id="rhand"
           mixin="r-hand"
           laser-controls="hand: right"
-                  intersection-spawn="event: click; mixin: voxel"
+          intersection-spawn="event: click; mixin: voxel"
         ></a-entity>
       </a-entity>
     </a-scene>
