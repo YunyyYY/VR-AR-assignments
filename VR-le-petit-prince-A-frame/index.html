@@ -145,8 +145,8 @@
         <a-mixin
           id="voxel"
           geometry="primitive: ring; radius-inner:1 radius-outer:1"
-                 rotation="90 0 0"
-                 scale="9 9 9"
+          rotation="90 0 0"
+          scale="9 9 9"
           material="shader: standard; side: double"
           random-color
           snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"
@@ -169,6 +169,10 @@
         <a-asset-item
           id="gltf"
           src="https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fout.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="prince-gltf"
+          src="https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2Fprince.glb"
         ></a-asset-item>
       </a-assets>
 
@@ -204,7 +208,7 @@
           position="0.89 3.049 0.55"
           scale="0.03 0.03 0.03"
           rotation="9.673 73.523 2.59"
-          gpoly="polyid: f_HG8bAlAfw; API_KEY: AIzaSyDsovdrekNH2A-NiKfMtMWA8LXebZQ41nk;"
+                  gltf-model="#prince-gltf"
           event-set__enter="_event: mouseenter; rotation: 11.673 130.35 4.59"
           event-set__leave="_event: mouseleave; rotation: 9.673 73.523 2.59"
           sound__mouseenter="src: #button3; on: mouseenter; poolSize: 2"

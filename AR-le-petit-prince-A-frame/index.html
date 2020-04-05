@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>le-petit-prince-v2</title>
+    <meta name="description" content="le-petit-prince-v2" />
+
+    <script src="/script.js" defer></script>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/2.1.8/aframe/build/aframe-ar.js"></script>
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+    <script src="//unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+    <script src="https://rawgit.com/Utopiah/googlepoly-load-component/master/googlepoly-load-component.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.0.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/snap.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/intersection-spawn.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/random-color.js"></script>
+
+    <script>
+      AFRAME.registerComponent("cursor-listener", {
+        init: function() {
+          var lastIndex = -1;
+          var COLORS = ["#ffff80", "#ccffcc", "#99bbff", "#ccc0ff"];
+          this.el.addEventListener("click", function(evt) {
+            lastIndex = (lastIndex + 1) % COLORS.length;
+            this.setAttribute("material", "color", COLORS[lastIndex]);
+            var audio = new Audio(
+              "//cdn.rawgit.com/michaelnebeling/src/master/button-2.mp3"
+            );
+            audio.play();
+            console.log("I was clicked at: ", evt.detail.intersection.point);
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene
+      cursor="rayOrigin: mouse"
+      arjs="debugUIEnabled: false"
+      style="margin: 0; padding: 0; width: 100%; height: 100%; position: absolute"
+    >
+      <a-assets>
+        <a-asset-item
+          id="gltf"
+          src="https://cdn.glitch.com/fcca0732-1a5f-40a8-a167-e58910fd68b9%2Fout.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="prince-gltf"
+          src="https://cdn.glitch.com/2ba62949-2973-4e76-bc88-c641d1a78be8%2Fprince.glb"
+        ></a-asset-item>
+      </a-assets>
+
+      <a-marker preset="hiro">
+        <a-entity id="main" position="0 0 -8">
+          <a-animation
+            attribute="rotation"
+            dur="30000"
+            to="0 360 0"
+            repeat="indefinite"
+            easing="linear"
+          ></a-animation>
+          <!-- prince -->
+          <a-entity
+            class="clickable"
+            id="prince"
+            position="0.89 3.049 0.55"
+            scale="0.03 0.03 0.03"
+            rotation="9.673 73.523 2.59"
+            gltf-model="#prince-gltf"
+            event-set__enter="_event: mouseenter; rotation: 11.673 130.35 4.59"
+            event-set__leave="_event: mouseleave; rotation: 9.673 73.523 2.59"
+            sound__mouseenter="src: #button3; on: mouseenter; poolSize: 2"
+            shadow
+          ></a-entity>
+
+          <!-- star -->
+          <a-sphere
+            static-body
+            cursor-listener
+            class="clickable"
+            position="0 -2 0"
+            radius="3"
+            color="#99bbff"
+            shader="flat"
+            opacity="0.7"
+            shadow
+          ></a-sphere>
+          <a-sphere
+            position="0 -2 0"
+            radius="3"
+            color="#bbd1e0"
+            shadow
+          ></a-sphere>
+
+          <!-- rose -->
+          <!--       source : https://poly.google.com/view/f6cqKzn4kPj -->
+
+          <a-entity
+            id="rose"
+            position="-1.05 0.483 -0.1"
+            scale="1.2 1.2 1.2"
+            rotation="-18.4 114.69 1.298"
+            gltf-model="#gltf"
+            shadow
+            ><a-entity
+              light="color: #ff1616; intensity: 10; type: point; distance: 2; decay: 1"
+              position="0.04 0.9 0.03"
+            ></a-entity>
+          </a-entity>
+          <a-cylinder
+            class="clickable"
+            id="glass"
+            position="-1.261 1.042 0"
+            scale="0.3 0.9 0.3"
+            rotation="2.292 2.42 24.95"
+            color="#c6e6e8"
+            opacity="0.4"
+            event-set__enter="_event: mouseenter; _target: #rose; scale: 3 3 3; position: -1 0 0; rotation: 15 37 0.36;"
+            event-set__enterg="_event: mouseenter; _target: #glass; visible: false; "
+            event-set__leave="_event: mouseleave; _target: #rose; scale: 1.2 1.2 1.2; position: -1.096 0.483 0; rotation: -18.4 114.69 1.298;"
+            event-set__leaveg="_event: mouseleave; _target: #glass; visible: true; "
+            shadow
+          >
+          </a-cylinder> </a-entity
+      ></a-marker>
+
+      <!--       environment-->
+      <a-entity
+        light="type: directional; color: #fff8df; intensity: 1.5; castShadow: true; "
+        position="-2 2 2"
+      ></a-entity>
+      <a-entity
+        position="-6 6 0"
+        particle-system="preset:dust;particleCount:1000;opacity:1;color: #f07c82,#63bbd0,#fecc11,#66c18c"
+      ></a-entity>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
