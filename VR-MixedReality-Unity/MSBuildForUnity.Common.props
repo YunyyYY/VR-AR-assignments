@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+    <MSBuildForUnityVersion>0.8.3</MSBuildForUnityVersion>
+    
+    <MSBuildForUnityGeneratedOutputDirectory>C:\Users\linguo\Desktop\example\MSBuild\Projects</MSBuildForUnityGeneratedOutputDirectory>
+    <UnityProjectAssetsPath>C:\Users\linguo\Desktop\example\Assets</UnityProjectAssetsPath>
+    <MSBuildForUnityDefaultOutputPath>$(UnityProjectAssetsPath)\Dependencies</MSBuildForUnityDefaultOutputPath>
+    
+    <UnityCurrentPlatform>WindowsStandalone32</UnityCurrentPlatform>
+    <UnityCurrentTargetFramework>netstandard2.0</UnityCurrentTargetFramework>
+    
+    <UnityMajorVersion>2019</UnityMajorVersion>
+    <UnityMinorVersion>3</UnityMinorVersion>
+  </PropertyGroup>
+  
+  <Target Name="_RemoveOutputDirectory" AfterTargets="Clean">
+    <RemoveDir Directories="$(OutputPath)" />
+  </Target>
+</Project>
